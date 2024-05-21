@@ -11,9 +11,9 @@ const inventorySchema = new Schema({
   inStock: { type: Boolean, required: true },
 });
 
-const productSchema = new Schema<ProductInterface>({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
+const productSchema = new Schema<ProductInterface | null>({
+  name: { type: String, required: true, trim: true },
+  description: { type: String, required: true, trim: true },
   price: { type: Number, required: true },
   category: { type: String, required: true },
   tags: { type: [String], required: true },
@@ -21,6 +21,6 @@ const productSchema = new Schema<ProductInterface>({
   inventory: { type: inventorySchema, required: true },
 });
 
-const ProductModel = model<ProductInterface>('Product', productSchema);
+const ProductModel = model<ProductInterface | null>('Product', productSchema);
 
 export default ProductModel;
