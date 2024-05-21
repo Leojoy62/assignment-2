@@ -27,19 +27,6 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-// const getAllProducts = async (req: Request, res: Response) => {
-//   try {
-//     const result = await productServices.getAllProductsFromDB();
-//     res.status(200).json({
-//       success: true,
-//       message: 'Products retrieved successfully',
-//       data: result,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 const getAllProducts = async (req: Request, res: Response) => {
   const searchTerm = req.query.searchTerm as string | undefined;
   console.log('query', searchTerm);
@@ -130,25 +117,6 @@ const updateProduct = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
-// const searchProducts = async (req: Request, res: Response) => {
-//   const searchTerm = req.query.searchTerm as string;
-
-//   try {
-//     const result = await productServices.searchProductsInDB(searchTerm);
-//     res.status(200).json({
-//       success: true,
-//       message: `Products matching search term '${searchTerm}' fetched successfully!`,
-//       data: result,
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'An error occurred while searching for products',
-//       error: error,
-//     });
-//   }
-// };
 
 export const productController = {
   createProduct,
