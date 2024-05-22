@@ -4,17 +4,23 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
-    languageOptions: { globals: globals.browser },
     ignores: ['**/node_modules/', '.dist/'],
-    rules: {
-      'no-unused-expressions': 'error',
-      'no-undef': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        process: 'readonly',
+      },
     },
-    parser: '@typescript-eslint/parser',
-    extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
-    plugins: ['@typescript-eslint'],
+
+    rules: {
+      'no-unused-vars': 'error',
+      'no-unused-expressions': 'error',
+      'prefer-const': 'error',
+      'no-console': 'warn',
+      'no-undef': 'error',
+    },
   },
+
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
 ];
