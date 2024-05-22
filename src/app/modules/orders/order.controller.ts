@@ -4,7 +4,7 @@ import { orderServices } from './order.service';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { order } = req.body;
+    const order = req.body;
 
     const zodValidatedData = OrderValidationSchema.parse(order);
     //will call service
@@ -15,12 +15,20 @@ const createOrder = async (req: Request, res: Response) => {
       message: 'Order placed successfully',
       data: result,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Something went wrong',
-      data: error,
-    });
+  } catch (error: any) {
+    if (error.message === 'Product id did not match') {
+      res.status(500).json({
+        success: false,
+        message: 'Product id did not match',
+        data: error,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Something went wrong',
+        data: error,
+      });
+    }
   }
 };
 
