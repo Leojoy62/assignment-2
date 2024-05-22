@@ -15,22 +15,29 @@ const createOrder = async (req: Request, res: Response) => {
       message: 'Order placed successfully',
       data: result,
     });
-  } catch (error: any) {
-    if (error.message === 'Product id did not match') {
-      res.status(400).json({
-        success: false,
-        message: 'Product id did not match',
-      });
-    } else if (error.message === 'Insufficient product quantity') {
-      res.status(400).json({
-        success: false,
-        message: 'Insufficient product quantity',
-      });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      if (error.message === 'Product id did not match') {
+        res.status(400).json({
+          success: false,
+          message: 'Product id did not match',
+        });
+      } else if (error.message === 'Insufficient product quantity') {
+        res.status(400).json({
+          success: false,
+          message: 'Insufficient product quantity',
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: 'Something went wrong',
+          error: error.message,
+        });
+      }
     } else {
       res.status(500).json({
         success: false,
-        message: 'Something went wrong',
-        error: error.message,
+        message: 'An unknown error occurred',
       });
     }
   }
