@@ -43,7 +43,7 @@ const getProducts = async (req: Request, res: Response) => {
         });
       } else {
         res.status(200).json({
-          success: true,
+          success: false,
           message: `No product found matching search term '${searchTerm}'`,
           data: result,
         });
