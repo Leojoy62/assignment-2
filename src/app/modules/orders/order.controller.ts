@@ -2,35 +2,6 @@ import { Request, Response } from 'express';
 import OrderValidationSchema from './order.validation';
 import { orderServices } from './order.service';
 
-// const createOrder = async (req: Request, res: Response) => {
-//   try {
-//     const order = req.body;
-
-//     const zodValidatedData = OrderValidationSchema.parse(order);
-//     //will call service
-//     const result = await orderServices.createOrderIntoDB(zodValidatedData);
-//     //will send response
-//     res.status(200).json({
-//       success: true,
-//       message: 'Order placed successfully',
-//       data: result,
-//     });
-//   } catch (error: any) {
-//     if (error.message === 'Product id did not match') {
-//       res.status(500).json({
-//         success: false,
-//         message: 'Product id did not match',
-//         data: error,
-//       });
-//     } else {
-//       res.status(500).json({
-//         success: false,
-//         message: 'Something went wrong',
-//         data: error,
-//       });
-//     }
-//   }
-// };
 const createOrder = async (req: Request, res: Response) => {
   try {
     const order = req.body;
@@ -65,7 +36,7 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-const getAllOrders = async (req: Request, res: Response) => {
+const getOrders = async (req: Request, res: Response) => {
   const email = req.query.email as string | undefined;
 
   try {
@@ -104,5 +75,5 @@ const getAllOrders = async (req: Request, res: Response) => {
 
 export const OrderController = {
   createOrder,
-  getAllOrders,
+  getOrders,
 };

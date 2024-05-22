@@ -2,17 +2,7 @@ import ProductModel from '../product/product.model';
 import { OrderInterface } from './order.interface';
 import OrderModel from './order.model';
 
-// const createOrderIntoDB = async (order: OrderInterface) => {
-//   const productId = order.productId;
-//   console.log('productid', productId);
-//   const isProductExists = await ProductModel.exists({ _id: productId });
-//   if (isProductExists) {
-//     const result = await OrderModel.create(order);
-//     return result;
-//   } else {
-//     throw new Error('Product id did not match');
-//   }
-// };
+// Create order
 const createOrderIntoDB = async (order: OrderInterface) => {
   const { productId, quantity } = order;
 
