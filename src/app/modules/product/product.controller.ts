@@ -27,14 +27,14 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-const getAllProducts = async (req: Request, res: Response) => {
+const getProducts = async (req: Request, res: Response) => {
   const searchTerm = req.query.searchTerm as string | undefined;
   console.log('query', searchTerm);
 
   try {
     let result;
     if (searchTerm) {
-      result = await productServices.searchProductsInDB(searchTerm);
+      result = await productServices.getProductsFromDB(searchTerm);
       if (result && result.length > 0) {
         res.status(200).json({
           success: true,
@@ -49,7 +49,7 @@ const getAllProducts = async (req: Request, res: Response) => {
         });
       }
     } else {
-      result = await productServices.getAllProductsFromDB();
+      result = await productServices.getProductsFromDB();
       res.status(200).json({
         success: true,
         message: 'All products fetched successfully!',
@@ -120,7 +120,7 @@ const updateProduct = async (req: Request, res: Response) => {
 
 export const productController = {
   createProduct,
-  getAllProducts,
+  getProducts,
   getSingleProduct,
   deleteProduct,
   updateProduct,
