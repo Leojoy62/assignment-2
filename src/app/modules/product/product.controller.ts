@@ -96,8 +96,8 @@ const deleteProduct = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const updateData = req.body.product;
-    console.log('upddated', updateData);
+    const updateData = req.body;
+
     const result = await productServices.updateProductInDB(
       productId,
       updateData,
